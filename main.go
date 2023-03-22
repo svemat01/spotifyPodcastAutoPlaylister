@@ -33,16 +33,12 @@ Time: %s
 
 	env.Validate()
 
-	spot.Setup(spotifyauth.New(
-		spotifyauth.WithRedirectURL(env.RedirectURI),
-		spotifyauth.WithScopes(spotifyauth.ScopeUserReadPrivate, spotifyauth.ScopePlaylistModifyPrivate, spotifyauth.ScopePlaylistModifyPublic),
-		spotifyauth.WithClientID(env.ClientID),
-		spotifyauth.WithClientSecret(env.ClientSecret)))
+	spot.Setup(spotifyauth.New(spotifyauth.WithRedirectURL(env.RedirectURI), spotifyauth.WithScopes(spotifyauth.ScopeUserReadPrivate, spotifyauth.ScopePlaylistModifyPrivate, spotifyauth.ScopePlaylistModifyPublic), spotifyauth.WithClientID(env.ClientID), spotifyauth.WithClientSecret(env.ClientSecret)))
 
 	items := make([]spotify.URI, 0)
 
-	for showID, limit := range env.Shows {
-		episodes, err := spot.Client.GetShowEpisodes(context.Background(), showID, spotify.Limit(limit))
+	for _, show := range env.Shows {
+		episodes, err := spot.Client.GetShowEpisodes(context.Background(), show.ShowID, spotify.Limit(show.NumEpisodes))
 		if err != nil {
 			panic(err)
 		}

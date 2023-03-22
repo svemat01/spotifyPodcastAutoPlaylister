@@ -17,12 +17,17 @@ var (
 	// RedirectURI is the OAuth redirect URI for the application
 	RedirectURI string
 	// Shows is a map of show names to the number of episodes to download
-	Shows map[string]int
-	// Playlist ID is the ID of the playlist to add the episodes to
+	Shows []Show
+	// PlaylistID is the ID of the playlist to add the episodes to
 	PlaylistID spotify.ID
 	// HTTP server port
 	Port string
 )
+
+type Show struct {
+	ShowID      string
+	NumEpisodes int
+}
 
 // Get and verify each environment variable
 func Validate() {
@@ -54,7 +59,7 @@ func Validate() {
 		//	Shows format is the following: "show1:5,show2:10,show3:15"
 		//	Where show1, show2, and show3 are the names of the shows and 5, 10, and 15 are the number of episodes to download
 		//	We need to parse this into a map[string]int
-		Shows = make(map[string]int)
+		Shows = make([]Show, 0)
 		for _, show := range strings.Split(shows, ",") {
 			s := strings.Split(show, ":")
 			if len(s) != 2 {
@@ -65,7 +70,8 @@ func Validate() {
 				envErrors = append(envErrors, "SPOTIFY_SHOWS is not in the correct format")
 				break
 			} else {
-				Shows[s[0]] = i
+				//Shows[s[0]] = i
+				Shows = append(Shows, Show{ShowID: s[0], NumEpisodes: i})
 			}
 
 		}

@@ -5,6 +5,7 @@ import (
 	"github.com/zmb3/spotify/v2"
 	"log"
 	"net/http"
+	"spotifyPodcastAutoPlaylister/env"
 )
 
 func setupHttp() {
@@ -14,7 +15,7 @@ func setupHttp() {
 		log.Println("Got request for:", r.URL.String())
 	})
 	go func() {
-		err := http.ListenAndServe(":8080", nil)
+		err := http.ListenAndServe(":"+env.Port, nil)
 		if err != nil {
 			log.Fatal(err)
 		}

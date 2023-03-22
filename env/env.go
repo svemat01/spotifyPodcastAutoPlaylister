@@ -20,6 +20,8 @@ var (
 	Shows map[string]int
 	// Playlist ID is the ID of the playlist to add the episodes to
 	PlaylistID spotify.ID
+	// HTTP server port
+	Port string
 )
 
 // Get and verify each environment variable
@@ -72,6 +74,11 @@ func Validate() {
 	PlaylistID = spotify.ID(os.Getenv("SPOTIFY_PLAYLIST_ID"))
 	if PlaylistID == "" {
 		envErrors = append(envErrors, "SPOTIFY_PLAYLIST_ID not set")
+	}
+
+	Port = os.Getenv("PORT")
+	if Port == "" {
+		envErrors = append(envErrors, "PORT not set")
 	}
 
 	// If there are any errors, print them and exit

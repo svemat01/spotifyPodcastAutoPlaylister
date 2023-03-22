@@ -13,12 +13,19 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/zmb3/spotify/v2"
 	"github.com/zmb3/spotify/v2/auth"
-	"spotifyPodcastAutoplaylister/env"
-	"spotifyPodcastAutoplaylister/spot"
+	"spotifyPodcastAutoPlaylister/env"
+	"spotifyPodcastAutoPlaylister/spot"
 	"time"
 )
 
 func main() {
+	fmt.Printf(`
+------------------------------------
+Spotify Podcast Autoplaylister
+Time: %s
+------------------------------------
+`, time.Now().Format("2006-01-02 15:04:05"))
+
 	err := godotenv.Load()
 	if err != nil {
 		fmt.Println("No .env file found")

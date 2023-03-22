@@ -1,4 +1,4 @@
-module spotifyPodcastAutoplaylister
+module spotifyPodcastAutoPlaylister
 
 go 1.20
 

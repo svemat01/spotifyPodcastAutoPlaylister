@@ -6,7 +6,7 @@ import (
 	"github.com/zmb3/spotify/v2"
 	spotifyauth "github.com/zmb3/spotify/v2/auth"
 	"log"
-	"spotifyPodcastAutoplaylister/spot/tokencache"
+	"spotifyPodcastAutoPlaylister/spot/tokencache"
 	"sync"
 	"time"
 )

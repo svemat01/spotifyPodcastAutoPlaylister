@@ -1,3 +1,5 @@
+name: Release Go Binaries
+
 on:
   release:
     types: [created]
@@ -28,4 +30,3 @@ jobs:
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
           binary_name: "spotAuto"
-          extra_files: README.md
